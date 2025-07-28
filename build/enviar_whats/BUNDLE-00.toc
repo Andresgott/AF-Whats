@@ -1,0 +1,3 @@
+([('enviar_whats',
+   '/Users/andresgott/Documents/Grupo Master/AF/dist/enviar_whats',
+   'EXECUTABLE')],)
