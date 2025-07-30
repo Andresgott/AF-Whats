@@ -1,5 +1,5 @@
 ('/Users/andresgott/Documents/Grupo Master/AF/dist/enviar_whats',
- False,
+ True,
  False,
  False,
  None,
@@ -3296,8 +3296,8 @@
  [],
  False,
  False,
- 1753713910,
- [('runw',
-   '/opt/homebrew/Caskroom/miniconda/base/lib/python3.13/site-packages/PyInstaller/bootloader/Darwin-64bit/runw',
+ 1753888988,
+ [('run',
+   '/opt/homebrew/Caskroom/miniconda/base/lib/python3.13/site-packages/PyInstaller/bootloader/Darwin-64bit/run',
    'EXECUTABLE')],
  '/opt/homebrew/Caskroom/miniconda/base/lib/libpython3.13.dylib')
