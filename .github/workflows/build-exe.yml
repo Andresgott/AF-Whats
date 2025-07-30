@@ -25,9 +25,10 @@ jobs:
     - name: Build EXE with PyInstaller
       run: pyinstaller --onefile enviar_whats.py
 
-    - name: Upload artifact to release
-      uses: softprops/action-gh-release@v1
+    - name: Upload Release
+      uses: ncipollo/release-action@v1
       with:
-        files: dist/enviar_whats.exe
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        artifacts: "dist/enviar_whats.exe"
+        tag: ${{ github.ref_name }}
+        generateReleaseNotes: true
+
