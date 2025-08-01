@@ -31,4 +31,6 @@ jobs:
         artifacts: "dist/enviar_whats.exe"
         tag: ${{ github.ref_name }}
         generateReleaseNotes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
