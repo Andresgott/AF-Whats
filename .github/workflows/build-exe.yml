@@ -34,8 +34,8 @@ jobs:
       - name: Upload Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "dist/enviar_whats.exe,dist/enviar_whats_bundle.zip"
+          artifacts: dist/enviar_whats.exe,dist/enviar_whats_bundle.zip
           tag: ${{ github.ref_name }}
           generateReleaseNotes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          token: ${{ github.token }}
+
