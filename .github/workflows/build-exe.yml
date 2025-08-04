@@ -1,23 +1,21 @@
-name: Build and Release
+name: Build EXE and Upload Artifact
 
 on:
   push:
     tags:
       - '*'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-latest
-
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -27,12 +25,8 @@ jobs:
       - name: Build .exe with PyInstaller
         run: pyinstaller --onefile enviar_whats.py
 
-      - name: Zip artifact
-        run: powershell Compress-Archive -Path "dist/enviar_whats.exe" -DestinationPath dist/enviar_whats_bundle.zip
-
-      - name: Release
-        uses: ncipollo/release-action@v1
+      - name: Upload EXE as artifact
+        uses: actions/upload-artifact@v4
         with:
-          artifacts: dist/enviar_whats.exe,dist/enviar_whats_bundle.zip
-          tag: ${{ github.ref_name }}
-          generateReleaseNotes: true
+          name: enviar_whats_exe
+          path: dist/enviar_whats.exe
