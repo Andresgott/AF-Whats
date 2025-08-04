@@ -1,41 +1,38 @@
-name: Build and Release EXE
+name: Build and Release
 
 on:
   push:
     tags:
-      - 'v*'
-  workflow_dispatch:
+      - '*'
 
 jobs:
   build:
     runs-on: windows-latest
 
+    permissions:
+      contents: write
+
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
       - name: Install dependencies
-        run: |
-          pip install pyinstaller
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt pyinstaller
 
-      - name: Build EXE with PyInstaller
+      - name: Build .exe with PyInstaller
         run: pyinstaller --onefile enviar_whats.py
 
-      - name: Create ZIP bundle
-        run: |
-          powershell Compress-Archive -Path "dist/enviar_whats.exe", "README.md" -DestinationPath dist/enviar_whats_bundle.zip
+      - name: Zip artifact
+        run: powershell Compress-Archive -Path "dist/enviar_whats.exe" -DestinationPath dist/enviar_whats_bundle.zip
 
-      - name: Upload Release
+      - name: Release
         uses: ncipollo/release-action@v1
         with:
           artifacts: dist/enviar_whats.exe,dist/enviar_whats_bundle.zip
           tag: ${{ github.ref_name }}
           generateReleaseNotes: true
-          token: ${{ github.token }}
-
